@@ -1,0 +1,17 @@
+1：style.css，需要加入
+html {
+    /*width: 1080px;*/
+    /*height: 1920px;*/
+    background-color: transparent;
+  }
+
+2.style.css, 修改下面样式的 line-height:26px; =line-height:43px;
+.dptab3 .dpci li.cur a
+
+3 增加透明度
+.dtex {
+    width: 434px;
+    position: relative;
+    padding: 29px 0 24px;
+    opacity: 0.99;
+}

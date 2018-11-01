@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+  <title>2018数博会会议日程</title>
+  <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../robot/css/base.css">
+  <link rel="stylesheet" href="../robot/css/style.css">
+</head>
+<body>
+<div class="vmain" style="width:1366px; height:768px; ">
+  <div class="return">会议日程</div>
+  <div class="title">2018数博会会议日程</div>
+  <div class="vtoa">
+    <div class="vtab">
+      <div class="vta"></div>
+      <div class="vtb"></div>
+      <div class="vtc">
+        <ul class="clearfix">
+          <!--<li :class="{cur:tabIndex == id}" v-for="(dateItem, id) in dateList" :key="id"><a href="javascript:void(0)" @click="tab(id,dateItem.date)">{{ dateItem.dateString }}</a></li>-->
+          <!--<li class="cur"><a href="#">5月26日<span>今天</span></a></li>-->
+          <!--<li><a href="#">5月27日</a></li>-->
+          <!--<li><a href="#">5月28日</a></li>-->
+          <li id="date0" onclick="tab(0, '2018-05-26')"><a href="#">5月26日</a></li>
+          <li id="date1" onclick="tab(1, '2018-05-27')"><a href="#">5月27日</a></li>
+          <li id="date2" onclick="tab(2, '2018-05-28')"><a href="#">5月28日</a></li>
+          <li id="date3" onclick="tab(3, '2018-05-29')"><a href="#">5月29日</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ritime" style="border: 3px solid #0a426f">
+      <div class="rtbg"></div>
+      <div class="rli">
+        <div class="rhi">
+          <ul id="ullist">
+           <!-- <li v-for="(meetingTopic, index) in meetingDetail" :key="index">
+              <div class="lind"></div>
+              <div class="rtit">{{ meetingTopic.meetingType }}</div>
+              <div class="rbox" v-for="(meetingItem, index1) in meetingTopic.meetings" :key="index1">
+                <div class="rbt">{{ meetingItem.name }}</div>
+                <div class="rbz">
+                  <p class="bz1">地点：{{ meetingItem.address }}</p>
+                  <p class="bz2">时间：{{ meetingItem.meetingTime }}</p>
+                  <p class="bz3">嘉宾：{{ meetingItem.guest }}</p>
+                </div>
+                &lt;!&ndash;<div class="rbtn">&ndash;&gt;
+                &lt;!&ndash;<a href="javascript:void(0)"　 @click="meetingDetailBox(meetingItem.id, meetingItem.name, '0')">会议介绍</a>&ndash;&gt;
+                &lt;!&ndash;<a href="javascript:void(0)"　 @click="meetingDetailBox(meetingItem.id, meetingItem.name, '1')">会场导览</a>&ndash;&gt;
+                &lt;!&ndash;</div>&ndash;&gt;
+              </div>
+            </li>-->
+            <!--<li>-->
+            <!--<div class="lind"></div>-->
+            <!--<div class="rtit">人工智能主题对话</div>-->
+            <!--<div class="rbox">-->
+            <!--<div class="rbt">人工智能趋势与发展</div>-->
+            <!--<div class="rbz">-->
+            <!--<p class="bz1">地点：国际生态会议中心分会场黄葛树厅</p>-->
+            <!--<p class="bz2">时间：09:00-10:00</p>-->
+            <!--<p class="bz3">嘉宾：马云、刘强东</p>-->
+            <!--</div>-->
+            <!--<div class="rbtn">-->
+            <!--<a href="#">会场介绍</a>-->
+            <!--<a href="#">会场导览</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</li>-->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  var dateList = ['2018-05-26', '2018-05-27', '2018-05-28', '2018-05-29'];
+  function tab(index, curDate){
+    $(".clearfix").find("li").removeClass("cur");
+    $("#date"+index).addClass("cur");
+    //获取数据
+    $("#ullist").empty();
+    var htmlStr = "";
+    $.ajax({ url: "http://222.85.147.140:10003/interface/meeting/findByPage?pageSize=100&date="+curDate,async:true, success: function(datas){
+        if(datas!=undefined && datas.data!=undefined && datas.data.length > 0){
+          for(var i in datas.data){
+            var tdata = datas.data[i];
+            htmlStr += '<li><div class="lind"></div><div class="rtit">' + tdata.meetingType + '</div>';
+            for(var j in tdata.meetings){
+              var ldata = tdata.meetings[j];
+              htmlStr += '<div class="rbox"><div class="rbt">'+ ldata.name ;
+              htmlStr += '</div><div class="rbz"><p class="bz1">'+ ldata.address ;
+              htmlStr += '</p><p class="bz2">'+ ldata.meetingTime ;
+              htmlStr += '</p><p class="bz3">'+ ldata.guest ;
+              htmlStr += '</p></div></div>';
+            }
+            htmlStr += '</li>';
+          }
+          $("#ullist").append(htmlStr);
+        }
+      }});
+  }
+  $(function(){
+    var tabIndex = 0;
+    for (var i in dateList) {
+      if (new Date().toDateString() === new Date(dateList[i]).toDateString()) {
+        tabIndex = i
+      }
+    }
+    $("#date"+tabIndex).addClass("cur");
+    $("#date"+tabIndex).find("span").css("display","");
+    tab(tabIndex, dateList[tabIndex]);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+.face-bg{
+    width: 800px;
+    height: 938px;
+    top:0px;
+    left: 354px;
+    background:url("/static/index/images/face_bg2.png") no-repeat center center;
+    position: absolute;
+    z-index: 1;
+}
+.face-box{
+    position: absolute;
+    width: 451px;
+    height: 626px;
+    background:url("/static/index/images/face_box_bg.png") no-repeat center center;
+    top:2520px;
+    left: 583px;
+    z-index: 2;
+    /* TODO */
+}
+.face-photo-border{
+    position: absolute;
+    left: 45px;
+    top: -16px;
+    width: 355px;
+    height: 355px;
+}
+.scanning{
+    width: 206px;
+    height: 8px;
+    background:url("/static/index/images/scan.png") no-repeat center center;
+    animation: scan_frames 3s linear infinite running;
+}
+.scaning-border{
+    position: absolute;
+    left: 75px;
+    top: 75px;
+    width: 206px;
+    height:206px;
+    background:url("/static/index/images/recognition_L.png") no-repeat center center;
+}
+.face-photo{
+    width: 187px;
+    height: 186px;
+    position: absolute;
+    left: 90px;
+    top: 83px;
+    /*background:url("../images/user_photo.png") no-repeat center center;*/
+    border:2px solid #46acc1;
+    border-radius: 50%;
+}
+
+.face-state{
+    position: absolute;
+    top: 361px;
+    left: 117px;
+    width: 222px;
+    height:222px;
+    background:url("/static/index/images/recognition_R.png") no-repeat center center;
+    animation: face_state 1.5s linear infinite running;
+}
+.face-tip{
+    width: 100px;
+    height:25px;
+    background:url("/static/index/images/text.png") no-repeat center center;
+    position: absolute;
+    right: 172px;
+    top: 459px;
+}
+.face-message{
+    position: absolute;
+    top: 287px;
+    right: -72px;
+    width: 445px;
+    height: 356px;
+}
+.face-message ul{
+    padding-left: 84px;
+    padding-top: 135px;
+}
+.face-message ul li{
+    padding-bottom:20px;
+    font-size: 22px;
+    color:#d0f0ff;
+    /*text-shadow:0 0 20px #46acc1, 0 0 35px #46acc1;*/
+}
+.face-fail{
+    position: absolute;
+    top: 365px;
+    left: 118px;
+    width: 218px;
+    height:218px;
+    background:url("/static/index/images/recognition4.png") no-repeat center center;
+}
+.label-name{
+
+}
+.label-type{
+
+}
+
+@keyframes face_state {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+@keyframes scan_frames {
+    from {transform: translateY(0px);}
+    to {transform: translateY(195px);}
+}
